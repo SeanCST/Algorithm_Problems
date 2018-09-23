@@ -1,0 +1,73 @@
+/* 剑指 Offer - 字符串的排列
+ 
+ * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,
+ * 则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+ * 输入描述:
+ * 输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
+ **/
+
+/* 方法1 */
+class Solution {
+public:
+    void PermutationHelp(vector<string> &ans, int k, string str) // 遍历第k位的所有可能
+    {
+        if(k == str.size() - 1)
+            ans.push_back(str);
+        unordered_set<char> us;  // 记录出现过的字符
+        sort(str.begin() + k, str.end());  // 保证按字典序输出
+        for(int i = k; i < str.size(); i++)
+        {
+            if(us.find(str[i]) == us.end()) // 只和没交换过的换
+            {  
+                us.insert(str[i]);
+                swap(str[i], str[k]);
+                PermutationHelp(ans, k + 1, str);
+                swap(str[i], str[k]);  // 复位
+            }
+        }
+    }
+    
+    vector<string> Permutation(string str) {
+        vector<string> ans;
+        PermutationHelp(ans, 0, str);
+        return ans;
+    }
+};
+
+
+/* 方法2 */
+#include <stdlib.h>
+#include <stdio.h>
+
+void Permutate(char *pStr, char *pBegin) 
+{
+    if(*pBegin == '\0') {
+        printf("%s\n", pStr);
+    } else {
+        for(char *pCh = pBegin; *pCh != '\0'; ++pCh) {
+            char temp = *pCh;
+            *pCh = *pBegin;
+            *pBegin = temp;
+
+            Permutate(pStr, pBegin + 1);
+
+            temp = *pCh;
+            *pCh = *pBegin;
+            *pBegin = temp;
+        }
+    }
+}
+
+void Permutation(char *pStr) 
+{
+    if(pStr == NULL)
+        return;
+
+    Permutate(pStr, pStr);
+}
+
+int main() {
+    char str[] = "abc";
+    Permutation(str);
+    return 0;
+}
