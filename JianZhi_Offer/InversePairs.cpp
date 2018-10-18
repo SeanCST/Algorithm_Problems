@@ -27,7 +27,7 @@ public:
        long long left = InversePairsCore(copy, data, start, start + length);
        long long right = InversePairsCore(copy, data, start + length + 1, end); 
         
-       int i = start+length;
+       int i = start + length;
        int j = end;
        int indexcopy = end;
        long long count = 0;
@@ -35,10 +35,10 @@ public:
        while(i >= start && j >= start + length + 1){
             if(data[i] > data[j]) {
                 copy[indexcopy--] = data[i--];
-                count = count + j - start - length;          //count=count+j-(start+length+1)+1;
+                count = count + j - start - length;          //count = count + j - (start + length + 1) + 1;
             }
             else {
-                copy[indexcopy--]=data[j--];
+                copy[indexcopy--] = data[j--];
             }          
         }
 
