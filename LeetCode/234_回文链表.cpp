@@ -9,12 +9,9 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(head == NULL || head->next == NULL) return true;
-        if(head->next->next == NULL) {
-            if(head->val == head->next->val)
-                return true;
-            else
-                return false;
+        if(head == NULL || head->next == NULL) return true; // 链表为空或只有一个结点，则是回文链表
+        if(head->next->next == NULL) { // 链表只有两个结点，看两个结点值是否相同 
+            return head->val == head->next->val;
         }
         
         // 使用快慢两个指针找到中点
