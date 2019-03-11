@@ -7,6 +7,26 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+class Solution {
+public:
+    bool res = true;
+
+    int maxDepth(TreeNode *node) {
+        if(node == NULL) return 0;
+        int l = maxDepth(node->left);
+        int r = maxDepth(node->right);
+        if(abs(l - r) > 1) 
+            res = false;
+        return max(l, r) + 1;
+    }
+
+    bool isBalanced(TreeNode* root) {
+        maxDepth(root);
+        return res;
+    }
+};
+
 class Solution {
 public:
     int height(TreeNode *node) {
