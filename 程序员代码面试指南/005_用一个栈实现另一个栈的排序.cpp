@@ -31,6 +31,7 @@ class Solution {
         stack<int> temp;
     public:
         void sortStack(stack<int> &s) {
+            // 将 s 中的元素按从大到小入栈到 temp 中
             while(!s.empty()) {
                 int cur = s.top();
                 s.pop();
@@ -44,7 +45,8 @@ class Solution {
                     temp.push(cur);
                 }
             }
-            
+
+            // 将 temp 中的元素依次入栈到 s 中
             while(!temp.empty()) {
                 s.push(temp.top());
                 temp.pop();
