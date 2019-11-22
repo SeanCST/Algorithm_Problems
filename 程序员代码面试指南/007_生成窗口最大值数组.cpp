@@ -63,7 +63,7 @@ int main() {
             dqe.pop_front();
         }
         
-        if(i - w >= -1) {
+        if(i >= w -1) {
             res[i - w + 1] = X[dqe.front()];
         }
     }
