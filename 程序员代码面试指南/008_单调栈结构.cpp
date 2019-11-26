@@ -110,7 +110,6 @@ int main() {
 
         if(!stk.empty() && arr[stk.top()[0]] == arr[i]) {
             stk.top().push_back(i);
-            
         } else {
             vector<int> vec;
             vec.push_back(i);
