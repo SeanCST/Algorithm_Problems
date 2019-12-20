@@ -34,7 +34,7 @@ void morris(tree_node *root) {
                 mostRight->right = NULL;
             }
         } 
-        // 若 cur 没有左子树或者左子树上最右节点的右指针指向 cur（表示已经遍历到最右了），cur 向右移动
+        // 若 cur 没有左子树或者左子树上最右节点的右指针指向 cur（表示已经遍历到最右了），cur 设为指向右孩子
         cur = cur->right;
     }
 }
