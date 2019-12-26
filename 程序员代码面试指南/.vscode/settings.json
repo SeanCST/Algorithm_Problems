@@ -7,6 +7,10 @@
         "iostream": "cpp",
         "deque": "cpp",
         "vector": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__split_buffer": "cpp",
+        "array": "cpp",
+        "queue": "cpp",
+        "string_view": "cpp"
     }
 }
