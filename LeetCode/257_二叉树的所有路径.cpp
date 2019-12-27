@@ -10,55 +10,43 @@
 class Solution {
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
-        vector<vector<int>> res;
         vector<string> pathRes;
-        if(root == NULL) return pathRes;
+        
+        if(root == NULL) {
+            return pathRes;
+        }
 
         vector<int> curPath;
-        curPath.push_back(root->val);
-        paths(root, res, curPath);
-        
-        for(int i = 0; i < res.size(); i++) {
-            string path;
-            for(int j = 0; j < res[i].size(); j++) {
-                if(j == 0)
-                    path += to_string(res[i][j]);
-                else {
-                    path += "->";
-                    path += to_string(res[i][j]);
-                }
-            }
-            pathRes.push_back(path);
-            path = "";
-        }
+        paths(root, pathRes, curPath);
         
         return pathRes;
     }
     
-    void paths(TreeNode* root, vector<vector<int>>& res, vector<int>& curPath) {
-        if(root->left == NULL && root->right == NULL) {
-            res.push_back(curPath);
+    void paths(TreeNode* root, vector<string>& pathRes, vector<int>& curPath) {
+        if(root == NULL) {
             return;
         }
-        
-        if(root->left != NULL) {
-            // 左孩子不为空，将左孩子加入到路径中
-            curPath.push_back(root->left->val);
-            // 递归左孩子
-            paths(root->left, res, curPath);
-            // 左孩子路径已完成，删除左孩子字符
-            curPath.pop_back();
+        curPath.push_back(root->val);
+        if(root->left == NULL && root->right == NULL) {
+            pathRes.push_back(buildPath(curPath));
+        } else {
+             paths(root->left, pathRes, curPath);
+             paths(root->right, pathRes, curPath);
         }
-        
-        if(root->right != NULL) {
-            // 右孩子不为空，将左孩子加入到路径中
-            curPath.push_back(root->right->val);
-            // 递归右孩子
-            paths(root->right, res, curPath);
-            // 右孩子路径已完成，删除右孩子字符
-            curPath.pop_back();
+        curPath.pop_back();
+    }
+
+    string buildPath(vector<int> curPath) {
+        string path;
+        for(int j = 0; j < curPath.size(); j++) {
+            if(j == 0){
+                path += to_string(curPath[j]);
+            } else {
+                path += "->";
+                path += to_string(curPath[j]);
+            }
         }
-        
-        
+
+        return path;
     }
 };
