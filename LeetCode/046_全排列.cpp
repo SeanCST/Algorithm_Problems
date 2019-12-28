@@ -13,7 +13,7 @@ public:
         }
     }
 
-    vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int> > permute(vector<int>& nums) {
         vector<vector<int> > res;
         backtrack(nums.size(), nums, res, 0);
         return res;
