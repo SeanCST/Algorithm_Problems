@@ -8,7 +8,7 @@ public:
 
         for(int i = first; i < n; i++) {
             swap(nums[first], nums[i]);
-            backtrack(n, nums, res,  first + 1);
+            backtrack(n, nums, res, first + 1);
             swap(nums[first], nums[i]);
         }
     }
