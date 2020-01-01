@@ -1,6 +1,5 @@
 #include <iostream>
 #include <map>
-#include <set>
 using namespace std;
 
 struct tree_node {
@@ -11,63 +10,21 @@ struct tree_node {
     tree_node(int v) : val(v), left(NULL), right(NULL){}
 };
 
-//     // 采用后序遍历
-// tree_node* nearestCommonAncestor(tree_node *root, tree_node *o1, tree_node *o2) {
-//     if(root == NULL || root == o1 || root == o2) {
-//         return root;
-//     }
-    
-//     tree_node *left = nearestCommonAncestor(root->left, o1, o2);
-//     tree_node *right = nearestCommonAncestor(root->right, o1, o2);
-    
-//     if(left != NULL && right != NULL) {
-//         return root;
-//     }
-    
-//     return left != NULL ? left : right;
-// }
-
-class Record {
-private:
-    map<tree_node*, tree_node*> parentMap;
-
-    void setMap(tree_node *root) {
-        if (root == NULL) {
-            return;
-        }
-        if(root->left) {
-            parentMap[root->left] = root;
-            setMap(root->left);
-        }
-        if(root->right) {
-            parentMap[root->right] = root;
-            setMap(root->right);
-        }
+// 采用后序遍历
+tree_node* nearestCommonAncestor(tree_node *root, tree_node *o1, tree_node *o2) {
+    if(root == NULL || root == o1 || root == o2) {
+        return root;
     }
-
-public:
-    Record(tree_node *root) {
-        if(root) {
-            parentMap[root] = NULL;
-        }
-        setMap(root);
+    
+    tree_node *left = nearestCommonAncestor(root->left, o1, o2);
+    tree_node *right = nearestCommonAncestor(root->right, o1, o2);
+    
+    if(left != NULL && right != NULL) {
+        return root;
     }
-
-    tree_node* query(tree_node *o1, tree_node *o2) {
-        set<tree_node *> o1Path;
-        while(parentMap.count(o1) > 0) {
-            o1Path.insert(o1);
-            o1 = parentMap[o1];
-        }
-
-        while(!o1Path.count(o2)) {
-            o2 = parentMap[o2];
-        }
-
-        return o2;
-    }
-};
-
+    
+    return left != NULL ? left : right;
+}
 
 int main () {
     int n, r;
@@ -97,10 +54,7 @@ int main () {
     tree_node *o1Node = nodes[o1];
     tree_node *o2Node = nodes[o2];
     
-    // tree_node *res = nearestCommonAncestor(root, o1Node, o2Node);
-
-    Record rec = Record(root);
-    tree_node *res = rec.query(o1Node, o2Node);
+    tree_node *res = nearestCommonAncestor(root, o1Node, o2Node);
     cout << res->val;
         
     return 0;
