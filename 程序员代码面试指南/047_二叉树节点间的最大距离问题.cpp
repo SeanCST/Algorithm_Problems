@@ -1,65 +1,68 @@
 #include <iostream>
+#include <vector>
 #include <map>
 using namespace std;
 
-struct tree_node {
-    int val;
-    tree_node *left;
-    tree_node *right;
-    
-    tree_node(int v) : val(v), left(NULL), right(NULL){}
+struct Employee {
+    int happy;
+    vector<Employee *> subordinates;
+    Employee(int h) : happy(h) {};
 };
 
 struct ReturnType {
-    int maxDistance;
-    int height;
-    ReturnType(int mD, int h) : maxDistance(mD), height(h) {}
+    int yesHeadMax;
+    int noHeadMax;
+    ReturnType(int yHM, int nHM) : yesHeadMax(yHM), noHeadMax(nHM) {};
 };
 
-ReturnType* process(tree_node *root) {
-    ReturnType *r = new ReturnType(0, 0); 
-    if(root == NULL) {
+ReturnType* process(Employee *X) {
+    int yesX = X->happy;
+    int noX = 0;
+    
+    if(X->subordinates.empty()) { // 基层员工
+        ReturnType *r = new ReturnType(yesX, noX);
+        return r;
+    } else {
+        for (Employee *sub : X->subordinates) {
+            ReturnType *subdData = process(sub);
+            yesX += subdData->noHeadMax;
+            noX += max(subdData->yesHeadMax, subdData->noHeadMax);
+        }
+        ReturnType *r = new ReturnType(yesX, noX);
         return r;
     }
-    
-    ReturnType *leftData = process(root->left);
-    ReturnType *rightData = process(root->right);
-    
-    r->height = max(leftData->height, rightData->height) + 1;
-    r->maxDistance = max(leftData->height + rightData->height + 1, max(leftData->maxDistance, rightData->maxDistance));
-    
-    return r;
 }
 
-int getMaxDistance(tree_node *root) {
-    ReturnType *data = process(root);
-    return data->maxDistance;
+int getMaxHappy(Employee *boss) {
+    if(!boss) {
+        return 0;
+    }
+    ReturnType *data = process(boss);
+    return max(data->yesHeadMax, data->noHeadMax);
 }
 
-int main () {
+int main() {
     int n, r;
     cin >> n >> r;
-    tree_node *root = new tree_node(r);
-    map<int, tree_node*> nodes;
-    nodes[r] = root;
-    
-    int fa, lch, rch;
+    vector<int> happyValues;
+    map<int, Employee *> m;
+    int val;
     for(int i = 0; i < n; i++) {
-        cin >> fa >> lch >> rch;
-        tree_node *node = nodes[fa];
-        if(lch != 0) {
-            tree_node *left = new tree_node(lch);
-            node->left = left;
-            nodes[lch] = left;
-        }
-        if(rch != 0) {
-            tree_node *right = new tree_node(rch);
-            node->right = right;
-            nodes[rch] = right;
-        }
+        cin >> val;
+        happyValues.push_back(val);
     }
-    
-    cout << getMaxDistance(root);
-    
+    Employee *boss = new Employee(happyValues[0]);
+    m[r] = boss;
+    int u, v;
+    for(int i = 1; i < n; i++) {
+        cin >> u >> v;
+        Employee *superior = m[u];
+        Employee *subordinate = new Employee(happyValues[i]);
+        superior->subordinates.push_back(subordinate);
+        m[v] = subordinate;
+    }
+
+    cout << getMaxHappy(boss);
+
     return 0;
 }
