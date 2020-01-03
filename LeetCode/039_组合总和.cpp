@@ -4,7 +4,7 @@ private:
     vector<int> cur;
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        int curSum = 0;
+        // int curSum = 0;
 
         // 排序做法
         // sort(candidates.begin(), candidates.end(), less<int>());
