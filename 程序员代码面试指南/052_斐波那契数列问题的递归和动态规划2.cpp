@@ -45,12 +45,12 @@ int main() {
     }
     
     if(n <= 2) {
-        fib = 1;
+        fib = n;
     }
     
     vector<vector<long>> base = {{1, 1}, {1, 0}};
     vector<vector<long>> res = matrixPower(base, n - 2);
-    fib = (res[0][0] + res[1][0]) % mod;
+    fib = (2 * res[0][0] + res[1][0]) % mod;
     
     cout << fib;
         

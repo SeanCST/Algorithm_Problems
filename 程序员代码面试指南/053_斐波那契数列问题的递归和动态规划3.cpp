@@ -48,9 +48,9 @@ int main() {
         fib = 1;
     }
     
-    vector<vector<long>> base = {{1, 1}, {1, 0}};
-    vector<vector<long>> res = matrixPower(base, n - 2);
-    fib = (res[0][0] + res[1][0]) % mod;
+    vector<vector<long>> base = {{1, 1, 0}, {0, 0, 1}, {1, 0, 0}};
+    vector<vector<long>> res = matrixPower(base, n - 3);
+    fib = (3 * res[0][0] + 2 * res[1][0] + res[2][0]) % mod;
     
     cout << fib;
         
