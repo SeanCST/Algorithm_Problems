@@ -24,7 +24,7 @@ vector<int> generateLIS(vector<int> arr, vector<int> dp) {
     return lis;
 }
 
-// 时间复杂度 O(nlogn)
+// 时间复杂度 O(n logn)
 vector<int> getDp(vector<int> arr) {
     vector<int> dp(arr.size(), 0);
     // 有效区为 ends[0...right]，无效区为 ends[right+1 ... N-1]
@@ -49,6 +49,12 @@ vector<int> getDp(vector<int> arr) {
         right = max(right, l);
         ends[l] = arr[i];
         dp[i] = l + 1;
+
+        for (int j = 0; j <= i; j++)
+        {
+            cout << ends[j] << " ";
+        }
+        cout << endl;
     }
     
     return dp;
