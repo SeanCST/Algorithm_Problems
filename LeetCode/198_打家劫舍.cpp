@@ -1,14 +1,28 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
+        int prev1 = 0, prev2 = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            int sum = max(prev2 + nums[i], prev1);
+            prev2 = prev1;
+            prev1 = sum;
+        }
+
+        return prev1;
+    }
+};
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
         if(nums.size() == 0)
             return 0;
         
         int take = 0, notTake = 0, maxProfit = 0;
         
         for(int i = 0; i < nums.size(); i++) {
-            take = notTake + nums[i]; // 偷
-            notTake = maxProfit; // 不偷
+            take = notTake + nums[i]; // 坷
+            notTake = maxProfit; // 丝坷
             maxProfit = max(take, notTake);
         }
         return maxProfit;
