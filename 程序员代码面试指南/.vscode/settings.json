@@ -12,5 +12,7 @@
         "array": "cpp",
         "queue": "cpp",
         "string_view": "cpp"
-    }
+    },
+    // Whether to run code in Integrated Terminal.
+    "code-runner.runInTerminal": true
 }
