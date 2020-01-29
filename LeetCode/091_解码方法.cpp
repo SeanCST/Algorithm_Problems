@@ -16,3 +16,30 @@ public:
         return dp[s.size() - 1];
     }
 };
+
+class Solution {
+public:
+    int numDecodings(string s) {
+        int n = s.length();
+        if(n == 0) {
+            return 0;
+        }
+        int cur = s[n - 1] == '0' ? 0 : 1;
+        int next = 1;
+        int tmp;
+        for(int i = n - 2; i >= 0; i--) {
+            if(s[i] == '0') {
+                next = cur;
+                cur = 0;
+            } else {
+                tmp = cur;
+                if((s[i] - '0') * 10 + s[i + 1] - '0' <= 26) {
+                    cur += next;
+                }
+                next = tmp;
+            }
+        }
+
+        return cur;
+    }
+};
