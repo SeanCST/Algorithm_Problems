@@ -7,7 +7,8 @@ using namespace std;
 
 // int setPost(vector<int> preOrder, int pi, int pj, 
 //             vector<int> inOrder, int ii, int ij, 
-//             vector<int>& postOrder, int si, map<int, int> inOrderMap) {
+//             vector<int>& postOrder, int si, 
+//             map<int, int> inOrderMap) {
 //     if (pi > pj) {
 //         return si;
 //     }

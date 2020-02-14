@@ -11,35 +11,35 @@ struct tree_node {
     tree_node(int v) : val(v), left(NULL), right(NULL){}
 };
 
-void preOrderRecur(tree_node *root) {
-    if(!root) {
-        return;
-    }
+// void preOrderRecur(tree_node *root) {
+//     if(!root) {
+//         return;
+//     }
     
-    cout << root->val << " ";
-    preOrderRecur(root->left);
-    preOrderRecur(root->right);
-}
+//     cout << root->val << " ";
+//     preOrderRecur(root->left);
+//     preOrderRecur(root->right);
+// }
 
-void inOrderRecur(tree_node *root) {
-    if(!root) {
-        return;
-    }
+// void inOrderRecur(tree_node *root) {
+//     if(!root) {
+//         return;
+//     }
     
-    inOrderRecur(root->left);
-    cout << root->val << " ";
-    inOrderRecur(root->right);
-}
+//     inOrderRecur(root->left);
+//     cout << root->val << " ";
+//     inOrderRecur(root->right);
+// }
 
-void postOrderRecur(tree_node *root) {
-    if(!root) {
-        return;
-    }
+// void postOrderRecur(tree_node *root) {
+//     if(!root) {
+//         return;
+//     }
     
-    postOrderRecur(root->left);
-    postOrderRecur(root->right);
-    cout << root->val << " ";
-}
+//     postOrderRecur(root->left);
+//     postOrderRecur(root->right);
+//     cout << root->val << " ";
+// }
 
 void preOrderUnRecur(tree_node *root) {
     if (!root) {
