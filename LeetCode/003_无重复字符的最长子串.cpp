@@ -5,6 +5,41 @@ public:
         if(n <= 1) {
             return n;
         }
+
+        map<char, bool> m;
+        int l = 0, r = 0;
+        int longestLength = 0;
+        int curLen = 0;
+        for(int i = 0; i < n; i++) {
+            r = i;
+            if(m[s[i]]) {
+                curLen = r - l;
+                while(l <= r) {
+                    if(s[l] == s[i]) {
+                        l++;
+                        break;
+                    } else {
+                        m[s[l++]] = false;
+                    }
+                }
+            } else {
+                curLen = r - l + 1;
+            }
+            longestLength = max(curLen, longestLength);
+            m[s[i]] = true;
+        }
+
+        return longestLength;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+        if(n <= 1) {
+            return n;
+        }
         int res = 1;
         set<char> occurances;
         int i = 0, j = 0;
