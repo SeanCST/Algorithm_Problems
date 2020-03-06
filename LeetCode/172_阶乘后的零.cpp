@@ -15,3 +15,19 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        long long factor = 5; // factor 由 5 变为 5^2, 5^3...
+        int res = 0; // 用 res 记录所有数字中含因子 5 的个数
+    
+        while(n / factor) {
+            res += n / factor; 
+            factor *= 5;
+        }
+
+        return res;
+    }
+};
