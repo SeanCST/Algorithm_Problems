@@ -8,39 +8,30 @@
  */
 class Solution {
 public:
-    // 迭代
+    // ??
     ListNode* reverseList(ListNode* head) {
-        ListNode *pNode = NULL;
-        
-        if(head != NULL) {
-            pNode = head->next;
-            head->next = NULL;
+        ListNode *reversedHead = NULL;
+        while(head) {
+            ListNode *pNext = head->next;
+            head->next = reversedHead;
+            reversedHead = head;
+            head = pNext;
         }
-        
-        while(pNode != NULL){
-            ListNode *temp = pNode->next;
-            pNode->next = head;
-            head = pNode;
-            pNode = temp;
-        }
-        
-        return head;
+
+        return reversedHead;
     }
-};
 
-
-class Solution {
-public:
-    // 递归
+    // ??
     ListNode* reverseList(ListNode* head) {
-        if(head == NULL || head->next == NULL)
+        if(head == NULL || head->next == NULL) {
             return head;
-        
-        ListNode *pNode = reverseList(head->next);
-        
-        head->next->next = head;
+        }
+
+        ListNode *pNext = head->next;
+        ListNode *reversedHead = reverseList(pNext);
+        pNext->next = head;
         head->next = NULL;
-        
-        return pNode;
+
+        return reversedHead;
     }
 };
