@@ -11,3 +11,15 @@ public:
         // return (num - 1) % 9 + 1;
     }
 };
+
+class Solution {
+public:
+    int addDigits(int num) {
+        // X = 100*a + 10*b + c = 99*a + 9*b + (a+b+c)；所以对9取余即可。
+        if(num % 9 == 0) {
+            return num == 0 ? 0 : 9;
+        } else {
+            return num % 9;
+        }
+    }
+};
