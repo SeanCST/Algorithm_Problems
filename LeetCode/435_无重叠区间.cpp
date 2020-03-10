@@ -31,6 +31,37 @@ public:
         
         return intervals.size() - count;
     }
-    
+};
 
+
+class Solution {
+public:
+    bool static cmp(const vector<int>& interval1, const vector<int>& interval2) {
+        if(interval1.size() < 2 || interval2.size() < 2) {
+            return false;
+        }
+        return interval1[0] < interval2[0];
+    }
+
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end(), cmp);
+        int res = 0;
+        int l = 0, r = 1;
+        while(r < intervals.size()) {
+            // 判断是否重叠
+            if(intervals[l][1] > intervals[r][0]) { // 重叠
+                // 移除掉右边界大的那个区间，并把 l 设为右边界小的那个区间的下标，供下一轮比较
+                if(intervals[l][1] > intervals[r][1]) {
+                    l = r;
+                }
+                res++;
+            } else { // 不重叠
+                l = r;
+            }
+
+            r++;
+        }
+
+        return res;
+    }
 };
