@@ -23,3 +23,28 @@ public:
         return res;
     }
 };
+
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        vector<int> res;
+        
+        map<char, int> lastAppearIndex; // 记录最后出现的位置
+        for(int i = 0; i < S.length(); i++) {
+            lastAppearIndex[S[i]] = i;
+        }
+
+        int curLeft = 0, curRight = 0;
+        for(int i = 0; i < S.length(); i++) {
+            if(lastAppearIndex[S[i]] > curRight) {
+                curRight = lastAppearIndex[S[i]];
+            } 
+            if(i == curRight) {
+                res.push_back(curRight - curLeft + 1);
+                curLeft = i + 1;
+            }
+        }
+
+        return res;
+    }
+};
