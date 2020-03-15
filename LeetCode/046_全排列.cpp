@@ -1,5 +1,27 @@
 class Solution {
 public:
+    void backtrace(vector<int>& nums, vector<vector<int>>& res, int start) {
+        if(start == nums.size()) {
+            res.push_back(nums);
+            return;
+        }
+
+        for(int i = start; i < nums.size(); i++) {
+            swap(nums[start], nums[i]);
+            backtrace(nums, res, start + 1);
+            swap(nums[start], nums[i]);
+        }
+    }
+
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> res;
+        backtrace(nums, res, 0);
+        return res;
+    }
+};
+
+class Solution {
+public:
     void backtrack(int n, vector<int> &nums, vector<vector<int>> &res, int first)
     {
         if(first == n) {
