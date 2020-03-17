@@ -15,6 +15,37 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+class Solution {
+public:
+    TreeNode* sortedListToBST(ListNode* head) {
+        if(head == NULL) {
+            return NULL;
+        }
+
+        ListNode *slow = head;
+        ListNode *slowPre = NULL;
+        ListNode *fast = head;
+        while(fast != NULL && fast->next != NULL) {
+            slowPre = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        TreeNode *t = new TreeNode(slow->val);
+        if(slowPre != NULL) {
+            slowPre->next = NULL;
+            t->left = sortedListToBST(head);
+        } else {
+            t->left = sortedListToBST(slowPre);
+        }
+        
+        t->right = sortedListToBST(slow->next);
+
+        return t;
+    }
+};
+
 class Solution {
 public:
 
