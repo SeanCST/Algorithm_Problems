@@ -8,6 +8,29 @@
  * };
  */
 
+
+class Solution {
+public:
+    int height(TreeNode *node) {
+        if (node == NULL) {
+            return 0;
+        }
+        int l = height(node->left);
+        if(l == -1) {
+            return -1;
+        }
+        int r = height(node->right);
+        if(r == -1) {
+            return -1;
+        }
+        return abs(l - r) > 1 ? -1 : max(l, r) + 1;
+    }
+
+    bool isBalanced(TreeNode* root) {
+        return height(root) != -1;
+    }
+};
+
 class Solution {
 public:
     bool res = true;

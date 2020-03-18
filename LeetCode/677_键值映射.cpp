@@ -5,6 +5,71 @@
  * obj->insert(key,val);
  * int param_2 = obj->sum(prefix);
  */
+
+struct TrieNode {
+    TrieNode *child[26];
+    // bool isKey;
+    int value;
+    TrieNode() {
+        // isKey = false;
+        value = 0;
+        for(int i = 0; i < 26; i++) {
+            child[i] = NULL;
+        }
+    }  
+    ~TrieNode() {
+        for(auto& c : child) {
+            delete c;
+        }
+    }
+};
+
+class MapSum {
+    TrieNode *t;
+public:
+    /** Initialize your data structure here. */
+    MapSum() {
+        t = new TrieNode();
+    }
+    
+    void insert(string key, int val) {
+        TrieNode *node = t;
+        for(char c : key) {
+            if(!node->child[c - 'a']) {
+                node->child[c - 'a'] = new TrieNode();
+            }
+            node = node->child[c - 'a'];
+        }
+        // t->isKey = true;
+        node->value = val;
+    }
+    
+    int sum(string prefix) {
+        TrieNode *node = t;
+        for(char c : prefix) {
+            if(!node->child[c - 'a']) {
+                return 0;
+            } else {
+                node = node->child[c - 'a'];
+            }
+        }
+        
+        return sumOfNode(node);
+    }
+
+    int sumOfNode(TrieNode *node) {
+        int sum = 0;
+        sum += node->value;
+        for(TrieNode *n : node->child) {
+            if(n != NULL) {
+                sum += sumOfNode(n);
+            }
+        }
+        return sum;
+    }
+};
+
+
  
 struct TrieNode {
     bool isWord;

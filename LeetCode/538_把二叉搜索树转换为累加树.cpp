@@ -7,6 +7,26 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        inOrder(root, 0);
+        return root;
+    }
+
+    int inOrder(TreeNode* root, int curSum) {
+        if(root == NULL) {
+            return curSum;
+        }
+        int sum = inOrder(root->right, curSum);
+        root->val = root->val + sum;
+        sum = inOrder(root->left, root->val);
+
+        return sum;
+    }
+};
+
 class Solution {
 private:
     int sum = 0;
