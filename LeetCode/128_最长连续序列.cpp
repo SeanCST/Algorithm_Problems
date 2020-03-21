@@ -2,6 +2,30 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         map<int, int> m;
+        int maxLength = 0;
+
+        for(int num : nums) {
+            if(m.find(num) == m.end()) {
+                int left = m.find(num - 1) == m.end() ? 0 : m[num - 1];
+                int right = m.find(num + 1) == m.end() ? 0 : m[num + 1];
+
+                int curLength = 1 + left + right;
+                maxLength = curLength > maxLength ? curLength : maxLength;
+
+                m[num] = curLength;
+                m[num - left] = curLength;
+                m[num + right] = curLength;
+            }
+        }
+
+        return maxLength;
+    }
+};
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        map<int, int> m;
         for(int num : nums) {
             m[num] = 1;
         }

@@ -19,3 +19,25 @@ public:
         }
     }
 };
+class Solution {
+public:
+    int countSubstrings(string s) {
+        // dp[j]表示从j位置到当前遍历到的字符位置i是否为回文字符串
+        vector<bool> dp(s.size(), false);
+
+        int res = 0;
+        for(int i = 0; i < s.size(); i++){
+            dp[i] = true;
+            res++;
+            for(int j = 0; j < i; j++){
+                if(s[j] == s[i] && dp[j + 1]) {
+                    dp[j] = true;
+                    res++;
+                } else {
+                    dp[j] = false;
+                }
+            }
+        }
+        return res;
+    }
+};

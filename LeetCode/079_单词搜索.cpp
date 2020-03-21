@@ -1,4 +1,43 @@
 class Solution {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int m = board.size();
+        if(m == 0) return word.length() == 0;
+        int n = board[0].size();
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(dfs(board, visited, word, i, j, m, n, 0)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    bool dfs(vector<vector<char>>& board, vector<vector<bool>>& visited, string& word, int i, int j, int m, int n, int k) {
+        if(k == word.length()) {
+            return true;
+        }
+        if(i < 0 || i >= m || j < 0 || j >= n || board[i][j] != word[k] || visited[i][j]) {
+            return false;
+        }
+
+        visited[i][j] = true;
+
+        bool res = dfs(board, visited, word, i + 1, j, m, n, k + 1) ||
+                   dfs(board, visited, word, i - 1, j, m, n, k + 1) ||
+                   dfs(board, visited, word, i, j + 1, m, n, k + 1) ||
+                   dfs(board, visited, word, i, j - 1, m, n, k + 1);
+
+        visited[i][j] = false;
+
+        return res;
+    }
+};
+
+class Solution {
 private:
     vector<vector<int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
     int m;

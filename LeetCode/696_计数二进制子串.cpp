@@ -1,21 +1,61 @@
 class Solution {
 public:
     int countBinarySubstrings(string s) {
-        int cnt = 0;
+        if(s.length() == 0) {
+            return 1;
+        }
+        int ans = 0;
         int last = 0, cur = 1;
+
         for(int i = 1; i < s.length(); i++) {
             if(s[i] == s[i - 1]) {
-                cur++; // cur 记录当前连续 0 或 1 的个数
+                cur++;
             } else {
-                last = cur; // last 记录之前连续 0 或 1 的个数
+                last = cur;
                 cur = 1;
             }
-            
-            // !!!
-            if(last >= cur)
-                cnt++;
+            if(last >= cur) {
+                ans++;
+            }
         }
-        
-        return cnt;
+
+        return ans;
     }
 };
+
+// class Solution {
+// public:
+//     int countBinarySubstrings(string s) {
+//         if(s.length() == 0) {
+//             return 1;
+//         }
+//         int ans = 0;
+//         int zeroCount = 0, oneCount = 0;
+
+//         for(int i = 0; i < s.length(); i++) {
+//             if(s[i] == '0') {
+//                 if(i > 0 && s[i - 1] == '1') {
+//                     zeroCount = 1;
+//                 } else {
+//                     zeroCount++;
+//                 }
+                
+//                 if(oneCount >= zeroCount) {
+//                     ans++;
+//                 } 
+//             } else if(s[i] == '1') {
+//                 if(i > 0 && s[i - 1] == '0') {
+//                     oneCount = 1;
+//                 } else {
+//                     oneCount++;
+//                 }
+                
+//                 if(zeroCount >= oneCount) {
+//                     ans++;
+//                 } 
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
