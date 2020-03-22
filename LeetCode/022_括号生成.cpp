@@ -1,5 +1,29 @@
 class Solution {
 public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        dfs(ans, "", 0, 0, n);
+
+        return ans;
+    }
+
+    void dfs(vector<string>& ans, string s, int l, int r, int n) {
+        if(l > n || r > n || r > l) {
+            return;
+        }
+
+        if(l == n && r == n) {
+            ans.push_back(s);
+            return;
+        }
+
+        dfs(ans, s + '(', l + 1, r, n);
+        dfs(ans, s + ')', l, r + 1, n);
+    }
+};
+
+class Solution {
+public:
     // 回溯法
     vector<string> generateParenthesis(int n) {
         if (n == 0) return {""};
