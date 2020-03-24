@@ -1,6 +1,26 @@
 class Solution {
 public:
     int arrayNesting(vector<int>& nums) {
+        int ans = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            int idx = i;
+            int count = 1;
+            while(nums[idx] != i && nums[idx] != -1) {
+                count++;
+                int temp = idx;
+                idx = nums[idx];
+                nums[temp] = -1;
+            }
+            ans = max(count, ans);
+        }
+
+        return ans;
+    }
+};
+
+class Solution {
+public:
+    int arrayNesting(vector<int>& nums) {
         int res = 0;
         map<int, bool> visited;
         for(int i = 0; i < nums.size(); i++) {
