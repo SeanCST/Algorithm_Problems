@@ -1,6 +1,52 @@
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> allWords(wordList.begin(), wordList.end());
+        if(allWords.find(endWord) == allWords.end()) {
+            return 0;
+        }
+        
+        // 双向搜索，哪边相关联的少就先搜索那边
+        unordered_set<string> beginSet{beginWord};
+        unordered_set<string> endSet{endWord};
+        int step = 1;
+
+        while(!beginSet.empty()) {
+            step++;
+            unordered_set<string> tempSet;
+            for(auto s : beginSet) {
+                allWords.erase(s);
+                for(int i = 0; i < s.length(); i++) {
+                    string tempStr = s;
+                    for(char c = 'a'; c <= 'z'; c++) {
+                        tempStr[i] = c;
+                        if(allWords.find(tempStr) == allWords.end()) {
+                            continue;
+                        }
+                        if(endSet.find(tempStr) != endSet.end()) {
+                            return step;
+                        }
+                        tempSet.insert(tempStr);
+                    }
+                }
+            }
+
+            if(tempSet.size() < endSet.size()) {
+                beginSet = tempSet;
+            } else {
+                beginSet = endSet;
+                endSet = tempSet;
+            }
+        }
+
+        return 0;
+    }
+};
+
+
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         int L = beginWord.length();
         map<string, vector<string>> allComboDict;
         for(string word : wordList) {
