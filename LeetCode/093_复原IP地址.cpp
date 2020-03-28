@@ -1,6 +1,53 @@
 class Solution {
 public:
     vector<string> restoreIpAddresses(string s) {
+        vector<vector<string>> res;
+        vector<string> cur;
+
+        process(s, res, cur, 4);
+
+        vector<string> ans;
+        for(vector<string> r : res) {
+            string tmp = "";
+            for(int i = 0; i < r.size(); i++) {
+                if(tmp.length() > 0) {
+                    tmp += ".";
+                }
+                tmp += r[i];
+            }
+            ans.push_back(tmp);
+        }
+
+        return ans;
+    }
+
+    void process(string s, vector<vector<string>>& res, vector<string> cur, int k) {
+        int len = s.length();
+        if(len > 3 * k || len < k) {
+            return;
+        } else if(k == 0 && len == 0) {
+            res.push_back(cur);
+            return;
+        }
+
+        int curMaxLen = min(len, 3);
+        curMaxLen = s[0] == '0' ? 1 : curMaxLen;
+        for(int i = 1; i <= curMaxLen; i++) {
+            string sub = s.substr(0, i);
+            if(i == 3 && stoi(sub) > 255) {
+                break;
+            } else {
+                cur.push_back(sub);
+                process(s.substr(i), res, cur, k - 1);
+                cur.pop_back();
+            }
+        }
+    }
+};
+
+class Solution {
+public:
+    vector<string> restoreIpAddresses(string s) {
         vector<string> addresses;
         string tempAddress;
         doRestore(0, tempAddress, addresses, s);
