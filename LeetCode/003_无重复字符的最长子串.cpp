@@ -1,6 +1,29 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int res = 0;
+        map<char, bool> m;
+        int j = 0; // abcdefacd
+        for(int i = 0; i < s.length(); i++) {
+            if(m[s[i]]) {
+                while(s[j] != s[i]) {
+                    m[s[j++]] = false;
+                }
+                res = max(res, i - j);
+                j++;
+            } else {
+                res = max(res, i - j + 1);
+            }
+            m[s[i]] = true;
+        }
+        
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
         int n = s.length();
         if(n <= 1) {
             return n;
