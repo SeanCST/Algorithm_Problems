@@ -9,25 +9,29 @@ public:
         // sum(P) = (target + sum(nums)) / 2
         // 对值 sum(P) 以 0-1 背包方法解决
 
-        int sum = 0;
-        int n = nums.size();
-        for(int i = 0; i < n; i++) {
-            sum += nums[i];
-        }
-        if(sum < S || (S + sum) % 2 == 1) {
+        if(nums.size() == 0) {
             return 0;
         }
-        int sumP = (S + sum) / 2;
         
-        vector<int> dp(sumP + 1, 0);
-        dp[0] = 1;
+        long long sum = 0;
         for(int num : nums) {
-            for(int j = sumP; j >= num; j--) {
-                dp[j] += dp[j - num];                
+            sum += num;
+        }
+        if((S + sum) % 2 == 1 || S > sum) {
+            return 0;
+        }
+        int target = (S + sum) / 2;
+        
+        // 0-1 背包刚好装满的问题
+        vector<int> dp(target + 1, 0);
+        dp[0] = 1; // 初始化和为 0 的情况：全部都不选，方案数为 1
+        for(int num : nums) {
+            for(int j = target; j >= num; j--) {
+                dp[j] += dp[j - num];
             }
         }
-
-        return dp[sumP];
+        
+        return dp[target];
     }
 
     // int find(vector<int>& nums, int start, int S) {
