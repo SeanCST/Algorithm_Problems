@@ -1,6 +1,23 @@
 class Solution {
 public:
     int minSteps(int n) {
+        int res = 0, d = 2;
+
+        while(n > 1) {
+            while(n % d == 0) {
+                res += d;
+                n /= d;
+            }
+            d++;
+        }
+
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int minSteps(int n) {
         if(n <= 1) {
             return 0;
         }
