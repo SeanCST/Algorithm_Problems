@@ -7,6 +7,39 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+class Solution {
+    bool res;
+    TreeNode *lastNode;
+    bool lastNodeChanged;
+public:
+    bool isValidBST(TreeNode* root) {
+        lastNode = new TreeNode(INT_MIN);
+        lastNodeChanged = false;
+
+        res = true;
+        inOrder(root);
+        
+        return res;
+    }
+    
+    void inOrder(TreeNode* root) {
+        if(root == NULL) {
+            return;
+        }
+        
+        inOrder(root->left);
+                
+        if(lastNodeChanged && lastNode->val >= root->val) {
+            res = false;
+        }
+        lastNode = root;
+        lastNodeChanged = true;
+        
+        inOrder(root->right);
+    }
+};
+
 class Solution {
 int *last = NULL;
 public:
