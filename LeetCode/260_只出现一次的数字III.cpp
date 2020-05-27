@@ -8,10 +8,12 @@ public:
         }
 
         // 找到 x_or 右边起第一个不为 0 的那一位
-        int k = 1;
-        while((x_or & k) == 0) {
-            k <<= 1;
-        } 
+        // int k = 1;
+        // while((x_or & k) == 0) {
+        //     k <<= 1;
+        // } 
+        // 一个数与它的负数相与，得到的就是它右边起第一个不为 0 的那一位
+        int k = x_or & (- x_or);
 
         int res1 = 0, res2 = 0;
         for(int num : nums) {
