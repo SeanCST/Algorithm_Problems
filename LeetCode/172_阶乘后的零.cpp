@@ -7,6 +7,25 @@
 class Solution {
 public:
     int trailingZeroes(int n) {
+        // int64_t k = 5;
+        // int res = 0;
+        // while(n / k) {
+        //     res += n / k;
+        //     k *= 5;
+        // }
+        // return res;
+
+        int res = 0;
+        while(n / 5) {
+            res += n / 5;
+            n /= 5;
+        }
+        return res;
+    }
+};
+class Solution {
+public:
+    int trailingZeroes(int n) {
         int res = 0;
         while(n > 0){
             res += n / 5;
