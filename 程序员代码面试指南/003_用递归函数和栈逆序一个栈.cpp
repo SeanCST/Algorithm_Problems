@@ -26,45 +26,99 @@
 #include <stack>
 using namespace std;
 
-class Solution {
-    public:
-        int getAndRemoveLastElement(stack<int> &s) {
-            int result = s.top();
-            s.pop();
-            if(s.empty()) {
-                return result;
-            } else {
-                int last = getAndRemoveLastElement(s);
-                s.push(result);
-                return last;
-            }
-        }
+int getAndRemoveLastElement(stack<int>& stk) {
+    int top = stk.top();
+    stk.pop();
+    
+    if(stk.empty()) {
+        return top;
+    } else {
+        int x = getAndRemoveLastElement(stk);
+        stk.push(top);
+        return x;
+    }
+}
 
-        void reverseStack(stack<int> &s) {
-            if(s.empty()) {
-                return;
-            }
-            int i = getAndRemoveLastElement(s);
-            ReverseStack(s);
-            s.push(i);
-        }
-};
-
-int main() {
-    int N, x;
-    cin >> N;
-    stack<int> s;
-    while(N--) {
-        cin >> x;
-        s.push(x);
+void reverseStack(stack<int>& stk) {
+    if(stk.empty()) {
+        return;
     }
     
-    Solution sol;
-    sol.reverseStack(s);
-    while(!s.empty()) {
-        cout << s.top() << " ";
-        s.pop();
+    int x = getAndRemoveLastElement(stk);
+    reverseStack(stk);
+    stk.push(x);
+}
+
+int main() {
+    int N;
+    cin >> N;
+    stack<int> stk;
+    int x;
+    for(int i = 0; i < N; i++) {
+        cin >> x;
+        stk.push(x);
+    }
+    
+    reverseStack(stk);
+    
+    stack<int> s1;
+    while(!stk.empty()) {
+        s1.push(stk.top());
+        stk.pop();
+    }
+    
+    while(!s1.empty()) {
+        cout << s1.top() << " ";
+        s1.pop();
     }
     
     return 0;
 }
+
+
+// #include <iostream>
+// #include <stack>
+// using namespace std;
+
+// class Solution {
+//     public:
+//         int getAndRemoveLastElement(stack<int> &s) {
+//             int result = s.top();
+//             s.pop();
+//             if(s.empty()) {
+//                 return result;
+//             } else {
+//                 int last = getAndRemoveLastElement(s);
+//                 s.push(result);
+//                 return last;
+//             }
+//         }
+
+//         void reverseStack(stack<int> &s) {
+//             if(s.empty()) {
+//                 return;
+//             }
+//             int i = getAndRemoveLastElement(s);
+//             reverseStack(s);
+//             s.push(i);
+//         }
+// };
+
+// int main() {
+//     int N, x;
+//     cin >> N;
+//     stack<int> s;
+//     while(N--) {
+//         cin >> x;
+//         s.push(x);
+//     }
+    
+//     Solution sol;
+//     sol.reverseStack(s);
+//     while(!s.empty()) {
+//         cout << s.top() << " ";
+//         s.pop();
+//     }
+    
+//     return 0;
+// }
