@@ -1,4 +1,3 @@
-
 class Solution {
     public String mostCommonWord(String paragraph, String[] banned) {
         String p = paragraph.toLowerCase();
