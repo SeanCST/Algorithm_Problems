@@ -9,10 +9,10 @@ class Solution {
             }
 
             while (!stk.isEmpty() && nums[i] > stk.peek()) {
-                last = stk.pop();
+                last = stk.pop(); // 更新 2
             }
             
-            stk.push(nums[i]);
+            stk.push(nums[i]); // 更新 3
         }
 
         return false;
