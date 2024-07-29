@@ -24,3 +24,37 @@ class Solution {
         return res;
     }
 }
+
+class Solution {
+    public int calPoints(String[] operations) {
+        List<Integer> points = new ArrayList<>();
+        int res = 0;
+        for (int i = 0 ; i < operations.length; i++) {
+            int size = points.size();
+            int cur = 0;
+
+            switch(operations[i]) {
+                case "+": 
+                    cur = points.get(size - 1) + points.get(size - 2);
+                    points.add(cur);
+                    res += cur;
+                    break;
+                case "D": 
+                    cur = points.get(size - 1) * 2;
+                    res += cur;
+                    points.add(cur);
+                    break;
+                case "C": 
+                    res -= points.get(size - 1);
+                    points.remove(size - 1);
+                    break;
+                default: 
+                    cur = Integer.valueOf(operations[i]);
+                    res += cur;
+                    points.add(cur);
+            }
+        }
+
+        return res;
+    }
+}
