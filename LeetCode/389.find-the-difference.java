@@ -1,15 +1,3 @@
-/*
- * @lc app=leetcode.cn id=389 lang=java
- * @lcpr version=30204
- *
- * [389] 找不同
- */
-
-
-// @lcpr-template-start
-
-// @lcpr-template-end
-// @lc code=start
 class Solution {
     public char findTheDifference(String s, String t) {
         int xor = 0;
@@ -39,18 +27,3 @@ class Solution {
         // return 'a';
     }
 }
-// @lc code=end
-
-
-
-/*
-// @lcpr case=start
-// "abcd"\n"abcde"\n
-// @lcpr case=end
-
-// @lcpr case=start
-// ""\n"y"\n
-// @lcpr case=end
-
- */
-
