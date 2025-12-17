@@ -1,5 +1,23 @@
 class Solution {
     public boolean hasAlternatingBits(int n) {
+        int a = n ^ (n >> 1);
+        return (a & (a + 1)) == 0;
+
+        // int k = n & 1;
+        // while (n > 0) {
+        //     if ((n & 1) != k) {
+        //         return false;
+        //     }
+        //     n >>= 1;
+        //     k = 1 - k;
+        // }
+
+        // return true;
+    }
+}
+
+class Solution {
+    public boolean hasAlternatingBits(int n) {
         int k = n % 2 == 0 ? 0 : 1;
         while(n > 0) {
             if((n & 1) != k) {
