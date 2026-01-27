@@ -14,6 +14,45 @@
  * }
  */
 class Solution {
+    private int res = 0;
+    private Map<Integer, Integer> map = new HashMap<>();
+
+    public int widthOfBinaryTree(TreeNode root) {
+        dfs(root, 1, 0);
+
+        return res;
+    }
+
+    private void dfs(TreeNode root, int i, int depth) {
+        if (root == null) {
+            return;
+        }
+
+        if (!map.containsKey(depth)) {
+            map.put(depth, i);
+        } 
+        res = Math.max(res, i - map.get(depth) + 1);
+        dfs(root.left, 2 * i - 1, depth + 1);
+        dfs(root.right, 2 * i, depth + 1);
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
     Map<Integer, Integer> levelMinIndex = new HashMap<>();
 
     public int widthOfBinaryTree(TreeNode root) {
