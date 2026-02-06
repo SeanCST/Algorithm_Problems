@@ -6,7 +6,8 @@ class Solution {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (isIsland(grid, i, j, m, n, visited)) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    dfs(grid, i, j, m, n, visited);
                     res++;
                 }
             }
@@ -15,18 +16,15 @@ class Solution {
         return res;
     }
 
-    boolean isIsland(char[][] grid, int i, int j, int m, int n, boolean[][] visited) {
-        if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] == '0' || visited[i][j] == true) {
-            return false;
+    void dfs(char[][] grid, int i, int j, int m, int n, boolean[][] visited) {
+        if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] == '0' || visited[i][j]) {
+            return;
         }
         visited[i][j] = true;
-        boolean cur = true;
-        cur |= isIsland(grid, i + 1, j, m, n, visited);
-        cur |= isIsland(grid, i - 1, j, m, n, visited);
-        cur |= isIsland(grid, i, j + 1, m, n, visited);
-        cur |= isIsland(grid, i, j - 1, m, n, visited);
-
-        return cur;
+        dfs(grid, i + 1, j, m, n, visited);
+        dfs(grid, i - 1, j, m, n, visited);
+        dfs(grid, i, j + 1, m, n, visited);
+        dfs(grid, i, j - 1, m, n, visited);
     }
 }
 

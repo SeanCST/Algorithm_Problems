@@ -11,6 +11,6 @@ class Solution {
         }
 
         long num = start + (n - 1) / digit; 
-        return Long.toString(num).charAt((n - 1) % digit) - '0';
+        return String.valueOf(num).charAt((n - 1) % digit) - '0';
     }
 }
