@@ -9,13 +9,13 @@ class Solution {
         visited = new boolean[nums.length];
         Arrays.sort(nums);
 
-        backtrace(nums, 0);
+        backtrace(nums);
 
         return res;
     }
 
-    private void backtrace(int[] nums, int idx) {
-        if (nums.length == idx) {
+    private void backtrace(int[] nums) {
+        if (perm.size() == nums.length) {
             res.add(new ArrayList<>(perm));
             return;
         }
@@ -25,9 +25,9 @@ class Solution {
             }
             perm.add(nums[i]);
             visited[i] = true;
-            backtrace(nums, idx + 1);
+            backtrace(nums);
             visited[i] = false;
-            perm.remove(idx);
+            perm.remove(perm.size() - 1);
         }
     }
 }
