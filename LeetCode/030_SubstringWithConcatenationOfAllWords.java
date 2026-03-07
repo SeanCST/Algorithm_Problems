@@ -5,7 +5,6 @@ class Solution {
             countMap.put(word, countMap.getOrDefault(word, 0) + 1);
         }
         int wordLen = words[0].length(), count = words.length;
-        int totalLen = wordLen * count;
 
         List<Integer> res = new ArrayList<>();
         for (int i = 0; i < wordLen; i++) {
