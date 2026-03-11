@@ -7,7 +7,7 @@ class Solution {
             last[s.charAt(i) - 'a'] = i;
         }  
         
-        int l = 0, r = last[s.charAt(0) - 'a'];
+        int l = 0, r = 0;
         for (int i = 0; i < len; i++) {
             r = Math.max(last[s.charAt(i) - 'a'], r);
             if (r == i) {
