@@ -15,19 +15,19 @@
  */
 class Solution {
     public int countNodes(TreeNode root) {
-        int hl = 0, hr = 0;
         TreeNode l = root, r = root;
+        int hl = 0, hr = 0;
         while (l != null) {
-            hl += 1;
+            hl++;
             l = l.left;
         }
         while (r != null) {
-            hr += 1;
+            hr++;
             r = r.right;
         }
 
         if (hl == hr) {
-            return (int)Math.pow(2, hl) - 1;
+            return (1 << hl) - 1;
         }
 
         return countNodes(root.left) + countNodes(root.right) + 1;
