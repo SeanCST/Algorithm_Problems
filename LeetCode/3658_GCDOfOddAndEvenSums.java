@@ -7,6 +7,7 @@ class Solution {
     }
 
     private int GCD(int a, int b) {
-        return a % b == 0 ? b : GCD(a, a % b);
+        // return a % b == 0 ? b : GCD(a, a % b);
+        return b == 0 ? a : GCD(b, a % b);
     }
 }
